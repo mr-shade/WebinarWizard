@@ -1,56 +1,53 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import Hero from "@/components/Hero";
+import Features from "@/components/Features";
+import SpeakerBio from "@/components/SpeakerBio";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
+import CTA from "@/components/CTA";
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
-        </div>
-      </div>
+    <div className="flex flex-col gap-20 py-8 md:py-10">
+      {/* Hero Section */}
+      <Hero />
 
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
+      {/* Features Section */}
+      <section id="features" className="scroll-mt-20">
+        <Features />
+      </section>
 
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div>
-    </section>
+      {/* CTA Section */}
+      <section>
+        <CTA
+          title="Don't Miss This Opportunity!"
+          subtitle="Spaces are limited. Reserve your spot now to secure access to this exclusive webinar."
+        />
+      </section>
+
+      {/* Speaker Bio Section */}
+      <section id="speaker" className="scroll-mt-20">
+        <h2 className="text-3xl font-bold text-center mb-12">Meet Your Host</h2>
+        <SpeakerBio />
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="scroll-mt-20">
+        <Testimonials />
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="scroll-mt-20">
+        <FAQ />
+      </section>
+
+      {/* Final CTA Section */}
+      <section>
+        <CTA
+          title="Ready to Transform Your Marketing Strategy?"
+          subtitle="Join our webinar and learn proven techniques to grow your business."
+          buttonText="Register Now"
+        />
+      </section>
+    </div>
   );
 }
