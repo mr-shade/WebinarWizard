@@ -80,20 +80,39 @@ const Features: React.FC<FeaturesProps> = ({ className }) => {
   ];
 
   return (
-    <div className={`${className}`}>
-      <h2 className="text-3xl font-bold text-center mb-12">What You'll Learn</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {features.map((feature, index) => (
-          <div 
-            key={index} 
-            className="bg-default-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
-          >
-            <div className="text-primary mb-4">{feature.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-            <p className="text-default-600">{feature.description}</p>
-          </div>
-        ))}
+    <div className={`${className} relative`}>
+      {/* Background decorative elements */}
+      <div className="absolute top-40 left-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl opacity-30 animate-float-slow"></div>
+      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30 animate-float"></div>
+
+      <div className="relative z-10">
+        <h2 className="text-3xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-300 to-white">What You'll Learn</h2>
+        <p className="text-center text-white/70 max-w-2xl mx-auto mb-12">Master these cutting-edge strategies and transform your digital marketing approach</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="tech-card p-6 rounded-xl relative group overflow-hidden"
+            >
+              {/* Glowing border effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              {/* Icon with glowing effect */}
+              <div className="relative z-10 text-primary mb-4 transform transition-transform duration-300 group-hover:scale-110 group-hover:text-white">
+                <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative">{feature.icon}</div>
+              </div>
+
+              {/* Content */}
+              <h3 className="text-xl font-semibold mb-2 relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary group-hover:from-white group-hover:to-white transition-colors duration-300">{feature.title}</h3>
+              <p className="text-white/70 relative z-10 group-hover:text-white/90 transition-colors duration-300">{feature.description}</p>
+
+              {/* Bottom line animation */}
+              <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary to-secondary w-0 group-hover:w-full transition-all duration-500"></div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

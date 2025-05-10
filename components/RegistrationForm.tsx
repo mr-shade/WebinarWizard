@@ -49,7 +49,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ className }) => {
     try {
       // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       console.log("Form submitted:", formData);
       setIsSubmitted(true);
       setFormData({ name: "", email: "" });
@@ -62,17 +62,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ className }) => {
   };
 
   return (
-    <div className={`bg-default-50 p-6 rounded-xl shadow-md ${className}`}>
+    <div className={`bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg ${className}`}>
       {isSubmitted ? (
         <div className="text-center py-8">
-          <h3 className="text-xl font-bold text-primary mb-2">Registration Successful!</h3>
-          <p className="text-default-600">
+          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Registration Successful!</h3>
+          <p className="text-white/80">
             Thank you for registering for our webinar. We've sent the details to your email.
           </p>
-          <Button 
-            color="primary"
-            variant="flat"
-            className="mt-4"
+          <Button
+            className="mt-6 glow-button"
             onClick={() => setIsSubmitted(false)}
           >
             Register Another Person
@@ -80,50 +83,64 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ className }) => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h3 className="text-xl font-bold mb-4">Reserve Your Spot Now</h3>
-          
+          <h3 className="text-xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Reserve Your Spot Now</h3>
+
           {error && (
-            <div className="mb-4 p-3 bg-danger-50 text-danger border border-danger rounded-lg">
+            <div className="mb-6 p-4 bg-accent/10 text-accent border border-accent/30 rounded-lg backdrop-blur-sm">
               {error}
             </div>
           )}
-          
-          <div className="space-y-4">
-            <Input
-              type="text"
-              label="Full Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="John Doe"
-              isRequired
-              variant="bordered"
-              radius="sm"
-            />
-            
-            <Input
-              type="email"
-              label="Email Address"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="john@example.com"
-              isRequired
-              variant="bordered"
-              radius="sm"
-            />
-            
+
+          <div className="space-y-6">
+            <div className="relative">
+              <Input
+                type="text"
+                label="Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="John Doe"
+                isRequired
+                variant="bordered"
+                radius="lg"
+                classNames={{
+                  inputWrapper: "bg-white/5 border-white/10 backdrop-blur-sm",
+                  input: "text-white",
+                  label: "text-white/70"
+                }}
+              />
+              <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+            </div>
+
+            <div className="relative">
+              <Input
+                type="email"
+                label="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="john@example.com"
+                isRequired
+                variant="bordered"
+                radius="lg"
+                classNames={{
+                  inputWrapper: "bg-white/5 border-white/10 backdrop-blur-sm",
+                  input: "text-white",
+                  label: "text-white/70"
+                }}
+              />
+              <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+            </div>
+
             <Button
               type="submit"
-              color="primary"
-              className="w-full"
+              className="w-full glow-button py-6 rounded-xl text-white font-medium text-lg"
               isLoading={isSubmitting}
-              size="lg"
             >
               {isSubmitting ? "Registering..." : "Register for Free"}
             </Button>
-            
-            <p className="text-xs text-default-500 text-center mt-2">
+
+            <p className="text-xs text-white/50 text-center mt-4">
               By registering, you agree to our Terms of Service and Privacy Policy.
             </p>
           </div>
